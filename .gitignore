@@ -3,16 +3,15 @@ __pycache__/
 *.pyc
 *.pyo
 .venv/
-env/
+
 venv/
 
-# === Environnement local ===
-.env
 
-# === Proof of Concept (non versionné) ===
+
+
 Proof of Concept/
 
-# === Données utilisateur ===
+
 # On garde le dossier docs/, mais pas son contenu
 docs/*
 !docs/.gitkeep
