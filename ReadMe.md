@@ -1,18 +1,33 @@
 # 💬 RAG Local avec LM Studio
 
-Ce projet met en place un **RAG (Retrieval-Augmented Generation)** 100% local sous Windows et Macos en utilisant :
+Ce projet met en place un **RAG (Retrieval-Augmented Generation)** 100% local sous Windows et macOS.
 
-- [LM Studio](https://lmstudio.ai) pour la génération de texte (LLM local, API compatible OpenAI)
-- [ChromaDB](https://www.trychroma.com/) pour l’indexation vectorielle
-- [BAAI/bge-m3](https://huggingface.co/BAAI/bge-m3) comme modèle d’embeddings multilingue (FR inclus)
-- [Streamlit](https://streamlit.io/) pour l’interface web style ChatGPT
+- [LM Studio](https://lmstudio.ai) → génération de texte (LLM local, API OpenAI-compatible)
+- [ChromaDB](https://www.trychroma.com/) → indexation vectorielle
+- [BAAI/bge-m3](https://huggingface.co/BAAI/bge-m3) → modèle d’embeddings multilingue (FR inclus)
+- [Streamlit](https://streamlit.io/) → interface web type ChatGPT
 
-👉 Objectif : poser des questions sur vos propres documents (.pdf, .docx, .txt, .xlsx) et obtenir des réponses basées sur leur contenu.
+👉 **Objectif** : poser des questions sur vos propres documents (.pdf, .docx, .txt, .xlsx) et obtenir des réponses sourcées.
+
+
+![Exemple d’utilisation](Pictures/image.png)
+
 
 ---
 
-## ⚙️ Arborescence
+## 🤔 Qu’est-ce qu’un RAG ?
 
+Un **RAG (Retrieval-Augmented Generation)** combine deux étapes :
+
+1. **Retrieval** : recherche des passages pertinents dans vos documents, grâce à des embeddings stockés dans une base vectorielle.
+2. **Augmented Generation** : le LLM génère une réponse en utilisant ces passages comme contexte.
+
+➡️ Résultat : des réponses **fiables, contextualisées et locales**.
+
+---
+
+## ⚙️ Arborescence du projet
+```bash
 rag_lmstudio/
 │── docs/ # Vos documents (peut contenir des sous-dossiers)
 │── db/ # Base vectorielle locale (Chroma)
@@ -22,6 +37,9 @@ rag_lmstudio/
 │── build_index.py # Script d’indexation incrémentale
 │── app.py # Interface web Streamlit (chat)
 │── README.md # Documentation du projet
+```
+---
+
 
 ---
 
@@ -29,14 +47,16 @@ rag_lmstudio/
 
 ### 1. Pré-requis
 - **Python 3.10+**
-- **NVIDIA GPU** (exploité via PyTorch CUDA) ou CPU
 - [LM Studio](https://lmstudio.ai) installé
+- **NVIDIA GPU** (CUDA) *ou* **Mac (MPS/CPU)** *ou* CPU seul
 
 ### 2. Installer les dépendances
-
+```bash
 pip install -r requirements.txt
+```
 
-(choisissez dans le fichier ce qui vous correpond Windows/Macos)
+
+(choisissez dans le fichier la bonne installation de PyTorch selon Windows/macOS)
 
 
 ### 3. Configurer LM Studio
@@ -52,21 +72,28 @@ pip install -r requirements.txt
 
 Créez un fichier .env à la racine :
 
+```Bash
 OPENAI_BASE_URL=http://127.0.0.1:1234/v1
 OPENAI_API_KEY=lm-studio
 LMSTUDIO_MODEL=llama-3.1-8b-instruct   # nom exact du modèle dans LM Studio
-
+```
 
 📥 Indexation des documents
 
-Placez vos fichiers dans le dossier docs/ (les sous-dossiers sont pris en charge).
+Déposez vos fichiers dans docs/ (les sous-dossiers sont pris en charge).
+Lancez ensuite :
 
-Lancez : python build_index.py
-
+```Bash
+python build_index.py
+```
+- Les documents sont découpés en chunks
+- Les embeddings sont calculés (GPU si dispo → sinon MPS/CPU)
+- La base vectorielle est sauvegardée dans db/
 
 💬 Lancer l’interface
-
-Lancez : streamlit run app.py
+```Bash
+streamlit run app.py
+```
 
 Une page web devrait s'ouvrir sinon : http://localhost:8501
 
@@ -76,11 +103,12 @@ Une page web devrait s'ouvrir sinon : http://localhost:8501
 
 Fonctionnalités :
 
-Interface chat style ChatGPT
-Bouton 🔁 Reconstruire l’index (dans la sidebar)
-Affichage des sources et passages utilisés
+- Interface style ChatGPT
+- Réponses affichées en streaming
+- Bouton 🔁 Reconstruire l’index
+- Affichage des sources et passages utilisés
 
 
 ## Auteur
 
-Arthur Prigent# RAG-with-LMStudio
+Arthur Prigent  
