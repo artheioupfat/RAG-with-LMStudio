@@ -1,0 +1,26 @@
+# === Python cache & venv ===
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+env/
+venv/
+
+# === Environnement local ===
+.env
+
+# === Proof of Concept (non versionné) ===
+Proof of Concept/
+
+# === Données utilisateur ===
+# On garde le dossier docs/, mais pas son contenu
+docs/*
+!docs/.gitkeep
+!docs/README.md
+
+# On garde le dossier db/, mais pas son contenu
+db/*
+!db/.gitkeep
+
+# === Logs & autres ===
+*.log

@@ -1,0 +1,57 @@
+# =========================
+# RAG Local – Dépendances Python
+# =========================
+# Ce fichier couvre Windows (CUDA) et macOS (MPS).
+# IMPORTANT : installez PyTorch (torch) séparément selon votre plateforme.
+#
+# --- Installation PyTorch recommandée ---
+# Windows / Linux AVEC GPU NVIDIA (CUDA 11.8) :
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+#
+# Windows / Linux SANS GPU (CPU only) :
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+#
+# macOS (Apple Silicon M1/M2/M3 ou Intel) – MPS/CPU :
+#   pip install torch torchvision torchaudio
+# (Optionnel) Pour éviter les plantages sur ops non supportées MPS :
+#   export PYTORCH_ENABLE_MPS_FALLBACK=1
+#
+# Astuce : vérifiez ensuite dans Python :
+#   import torch; print("CUDA:", torch.cuda.is_available()); 
+#   print("MPS:", hasattr(torch.backends,"mps") and torch.backends.mps.is_available())
+
+# --- Core app / UI / LLM client ---
+python-dotenv
+streamlit
+openai>=1.30.0
+
+# --- LangChain & Vector Store ---
+langchain>=0.2.0
+langchain-community>=0.2.0
+chromadb>=0.4.24
+
+# --- Embeddings & NLP ---
+sentence-transformers>=2.2.2
+transformers>=4.40.0
+
+# --- Documents loaders ---
+pypdf>=4.0.0
+python-docx
+pandas
+openpyxl
+
+# --- OCR (optionnel, pour PDF scannés) ---
+# Nécessite des dépendances système :
+#   - Windows : installer Tesseract OCR (UB Mannheim build)
+#   - macOS : brew install tesseract poppler
+pytesseract
+pillow
+pdf2image
+
+# --- Recherche & qualité (optionnel mais recommandé) ---
+rank-bm25
+# faiss-cpu               # Optionnel (peut être capricieux sur macOS ARM). Laisser commenté si inutile.
+
+# --- Utilitaires ---
+tqdm
+numpy
