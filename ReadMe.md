@@ -9,7 +9,7 @@ Ce projet met en place un **RAG (Retrieval-Augmented Generation)** 100% local so
 
 👉 **Objectif** : poser des questions sur vos propres documents (.pdf, .docx, .txt, .xlsx) et obtenir des réponses sourcées.
 
-
+Exemple d'utilisation : 
 ![Exemple d’utilisation](Pictures/image.png)
 
 
